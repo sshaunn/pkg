@@ -1,7 +1,7 @@
 package v2
 
 import (
-	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg/common"
 )
 
@@ -15,7 +15,7 @@ func (p *SpotAccountClient) Init() *SpotAccountClient {
 }
 
 func (p *SpotAccountClient) Info() (string, error) {
-	params := internal.NewParams()
+	params := pkg.NewParams()
 	resp, err := p.BitgetRestClient.DoGet("/api/v2/spot/account/info", params)
 	return resp, err
 }

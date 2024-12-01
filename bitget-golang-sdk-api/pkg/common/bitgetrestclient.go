@@ -3,7 +3,7 @@ package common
 import (
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/config"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/constants"
-	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -32,7 +32,7 @@ func (p *BitgetRestClient) Init() *BitgetRestClient {
 }
 
 func (p *BitgetRestClient) DoPost(uri string, params string) (string, error) {
-	timesStamp := internal.TimesStamp()
+	timesStamp := pkg.TimesStamp()
 	//body, _ := internal.BuildJsonParams(params)
 
 	sign := p.Signer.Sign(constants.POST, uri, params, timesStamp)
@@ -44,7 +44,7 @@ func (p *BitgetRestClient) DoPost(uri string, params string) (string, error) {
 	buffer := strings.NewReader(params)
 	request, err := http.NewRequest(constants.POST, requestUrl, buffer)
 
-	internal.Headers(request, p.ApiKey, timesStamp, sign, p.Passphrase)
+	pkg.Headers(request, p.ApiKey, timesStamp, sign, p.Passphrase)
 	if err != nil {
 		return "", err
 	}
@@ -66,8 +66,8 @@ func (p *BitgetRestClient) DoPost(uri string, params string) (string, error) {
 }
 
 func (p *BitgetRestClient) DoGet(uri string, params map[string]string) (string, error) {
-	timesStamp := internal.TimesStamp()
-	body := internal.BuildGetParams(params)
+	timesStamp := pkg.TimesStamp()
+	body := pkg.BuildGetParams(params)
 	//fmt.Println(body)
 
 	sign := p.Signer.Sign(constants.GET, uri, body, timesStamp)
@@ -78,7 +78,7 @@ func (p *BitgetRestClient) DoGet(uri string, params map[string]string) (string, 
 	if err != nil {
 		return "", err
 	}
-	internal.Headers(request, p.ApiKey, timesStamp, sign, p.Passphrase)
+	pkg.Headers(request, p.ApiKey, timesStamp, sign, p.Passphrase)
 
 	response, err := p.HttpClient.Do(request)
 

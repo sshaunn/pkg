@@ -6,8 +6,8 @@ import (
 	"github.com/robfig/cron"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/config"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/constants"
-	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/logging/applogger"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg"
 	model2 "github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg/model"
 	"sync"
 	"time"
@@ -64,7 +64,7 @@ func (p *BitgetBaseWsClient) ConnectWebSocket() {
 }
 
 func (p *BitgetBaseWsClient) Login() {
-	timesStamp := internal.TimesStampSec()
+	timesStamp := pkg.TimesStampSec()
 	sign := p.Signer.Sign(constants.WsAuthMethod, constants.WsAuthPath, "", timesStamp)
 	if constants.RSA == config.SignType {
 		sign = p.Signer.SignByRSA(constants.WsAuthMethod, constants.WsAuthPath, "", timesStamp)
@@ -100,7 +100,7 @@ func (p *BitgetBaseWsClient) ping() {
 }
 
 func (p *BitgetBaseWsClient) SendByType(req model2.WsBaseReq) {
-	json, _ := internal.ToJson(req)
+	json, _ := pkg.ToJson(req)
 	p.Send(json)
 }
 
@@ -172,7 +172,7 @@ func (p *BitgetBaseWsClient) ReadLoop() {
 			applogger.Info("Keep connected:" + message)
 			continue
 		}
-		jsonMap := internal.JSONToMap(message)
+		jsonMap := pkg.JSONToMap(message)
 
 		v, e := jsonMap["code"]
 

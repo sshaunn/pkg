@@ -1,7 +1,7 @@
 package client
 
 import (
-	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg/common"
 )
 
@@ -15,7 +15,7 @@ func (p *BitgetApiClient) Init() *BitgetApiClient {
 }
 
 func (p *BitgetApiClient) Post(url string, params map[string]string) (string, error) {
-	postBody, jsonErr := internal.ToJson(params)
+	postBody, jsonErr := pkg.ToJson(params)
 	if jsonErr != nil {
 		return "", jsonErr
 	}

@@ -1,7 +1,7 @@
 package v2
 
 import (
-	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg/common"
 )
 
@@ -25,7 +25,7 @@ func (p *MixAccountClient) Accounts(params map[string]string) (string, error) {
 }
 
 func (p *MixAccountClient) SetLeverage(params map[string]string) (string, error) {
-	postBody, jsonErr := internal.ToJson(params)
+	postBody, jsonErr := pkg.ToJson(params)
 	if jsonErr != nil {
 		return "", jsonErr
 	}
@@ -34,7 +34,7 @@ func (p *MixAccountClient) SetLeverage(params map[string]string) (string, error)
 }
 
 func (p *MixAccountClient) SetMargin(params map[string]string) (string, error) {
-	postBody, jsonErr := internal.ToJson(params)
+	postBody, jsonErr := pkg.ToJson(params)
 	if jsonErr != nil {
 		return "", jsonErr
 	}
@@ -43,7 +43,7 @@ func (p *MixAccountClient) SetMargin(params map[string]string) (string, error) {
 }
 
 func (p *MixAccountClient) SetMarginMode(params map[string]string) (string, error) {
-	postBody, jsonErr := internal.ToJson(params)
+	postBody, jsonErr := pkg.ToJson(params)
 	if jsonErr != nil {
 		return "", jsonErr
 	}
@@ -53,7 +53,7 @@ func (p *MixAccountClient) SetMarginMode(params map[string]string) (string, erro
 
 // position
 func (p *MixAccountClient) SetPositionMode(params map[string]string) (string, error) {
-	postBody, jsonErr := internal.ToJson(params)
+	postBody, jsonErr := pkg.ToJson(params)
 	if jsonErr != nil {
 		return "", jsonErr
 	}
