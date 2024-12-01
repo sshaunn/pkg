@@ -1,9 +1,9 @@
 package common
 
 import (
-	"bitget/config"
-	"bitget/constants"
-	"bitget/internal"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/config"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/constants"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal"
 	"io/ioutil"
 	"net/http"
 	"strings"

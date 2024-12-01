@@ -1,8 +1,8 @@
 package v1
 
 import (
-	"bitget/internal"
-	"bitget/internal/common"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal/common"
 )
 
 type MixOrderClient struct {

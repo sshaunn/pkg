@@ -1,9 +1,9 @@
 package internal
 
 import (
-	"bitget/constants"
 	"encoding/json"
 	"errors"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/constants"
 	"net/http"
 	"sort"
 	"strconv"

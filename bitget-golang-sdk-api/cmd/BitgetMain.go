@@ -1,9 +1,9 @@
 package main
 
 import (
-	"bitget/internal/model"
-	"bitget/pkg/client/ws"
 	"fmt"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal/model"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg/client/ws"
 )
 
 func main() {

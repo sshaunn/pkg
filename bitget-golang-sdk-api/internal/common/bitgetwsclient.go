@@ -1,14 +1,14 @@
 package common
 
 import (
-	"bitget/config"
-	"bitget/constants"
-	"bitget/internal"
-	"bitget/internal/model"
-	"bitget/logging/applogger"
 	"fmt"
 	"github.com/gorilla/websocket"
 	"github.com/robfig/cron"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/config"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/constants"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal/model"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/logging/applogger"
 	"sync"
 	"time"
 )
