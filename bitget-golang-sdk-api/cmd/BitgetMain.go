@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal/model"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg/client/ws"
+	"github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg/model"
 )
 
 func main() {

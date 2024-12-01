@@ -7,8 +7,8 @@ import (
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/config"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/constants"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal"
-	"github.com/sshaunn/pkg/bitget-golang-sdk-api/internal/model"
 	"github.com/sshaunn/pkg/bitget-golang-sdk-api/logging/applogger"
+	model2 "github.com/sshaunn/pkg/bitget-golang-sdk-api/pkg/model"
 	"sync"
 	"time"
 )
@@ -23,16 +23,16 @@ type BitgetBaseWsClient struct {
 	SendMutex        *sync.Mutex
 	WebSocketClient  *websocket.Conn
 	LastReceivedTime time.Time
-	AllSuribe        *model.Set
+	AllSuribe        *model2.Set
 	Signer           *Signer
-	ScribeMap        map[model.SubscribeReq]OnReceive
+	ScribeMap        map[model2.SubscribeReq]OnReceive
 }
 
 func (p *BitgetBaseWsClient) Init() *BitgetBaseWsClient {
 	p.Connection = false
-	p.AllSuribe = model.NewSet()
+	p.AllSuribe = model2.NewSet()
 	p.Signer = new(Signer).Init(config.SecretKey)
-	p.ScribeMap = make(map[model.SubscribeReq]OnReceive)
+	p.ScribeMap = make(map[model2.SubscribeReq]OnReceive)
 	p.SendMutex = &sync.Mutex{}
 	p.Ticker = time.NewTicker(constants.TimerIntervalSecond * time.Second)
 	p.LastReceivedTime = time.Now()
@@ -70,7 +70,7 @@ func (p *BitgetBaseWsClient) Login() {
 		sign = p.Signer.SignByRSA(constants.WsAuthMethod, constants.WsAuthPath, "", timesStamp)
 	}
 
-	loginReq := model.WsLoginReq{
+	loginReq := model2.WsLoginReq{
 		ApiKey:     config.ApiKey,
 		Passphrase: config.PASSPHRASE,
 		Timestamp:  timesStamp,
@@ -79,7 +79,7 @@ func (p *BitgetBaseWsClient) Login() {
 	var args []interface{}
 	args = append(args, loginReq)
 
-	baseReq := model.WsBaseReq{
+	baseReq := model2.WsBaseReq{
 		Op:   constants.WsOpLogin,
 		Args: args,
 	}
@@ -99,7 +99,7 @@ func (p *BitgetBaseWsClient) ping() {
 	p.Send("ping")
 }
 
-func (p *BitgetBaseWsClient) SendByType(req model.WsBaseReq) {
+func (p *BitgetBaseWsClient) SendByType(req model2.WsBaseReq) {
 	json, _ := internal.ToJson(req)
 	p.Send(json)
 }
@@ -203,7 +203,7 @@ func (p *BitgetBaseWsClient) GetListener(argJson interface{}) OnReceive {
 
 	mapData := argJson.(map[string]interface{})
 
-	subscribeReq := model.SubscribeReq{
+	subscribeReq := model2.SubscribeReq{
 		InstType: fmt.Sprintf("%v", mapData["instType"]),
 		Channel:  fmt.Sprintf("%v", mapData["channel"]),
 		InstId:   fmt.Sprintf("%v", mapData["instId"]),
