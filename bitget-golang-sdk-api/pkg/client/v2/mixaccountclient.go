@@ -9,9 +9,11 @@ type MixAccountClient struct {
 	BitgetRestClient *common.BitgetRestClient
 }
 
-func (p *MixAccountClient) Init() *MixAccountClient {
-	p.BitgetRestClient = new(common.BitgetRestClient).Init()
-	return p
+func NewMixAccountClient(apiKey string, secretKey string, passphrase string) *MixAccountClient {
+	c := common.NewClient(apiKey, secretKey, passphrase)
+	return &MixAccountClient{
+		BitgetRestClient: c,
+	}
 }
 
 func (p *MixAccountClient) Account(params map[string]string) (string, error) {

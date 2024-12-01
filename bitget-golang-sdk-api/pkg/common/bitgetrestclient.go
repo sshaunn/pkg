@@ -19,16 +19,17 @@ type BitgetRestClient struct {
 	Signer       *Signer
 }
 
-func (p *BitgetRestClient) Init() *BitgetRestClient {
-	p.ApiKey = config.ApiKey
-	p.ApiSecretKey = config.SecretKey
-	p.BaseUrl = config.BaseUrl
-	p.Passphrase = config.PASSPHRASE
-	p.Signer = new(Signer).Init(config.SecretKey)
-	p.HttpClient = http.Client{
-		Timeout: time.Duration(config.TimeoutSecond) * time.Second,
+func NewClient(apiKey string, secretKey string, passphrase string) *BitgetRestClient {
+	return &BitgetRestClient{
+		ApiKey:       apiKey,
+		ApiSecretKey: secretKey,
+		Passphrase:   passphrase,
+		BaseUrl:      config.BaseUrl,
+		Signer:       new(Signer).Init(secretKey),
+		HttpClient: http.Client{
+			Timeout: time.Duration(config.TimeoutSecond) * time.Second,
+		},
 	}
-	return p
 }
 
 func (p *BitgetRestClient) DoPost(uri string, params string) (string, error) {

@@ -8,9 +8,9 @@ type MixMarketClient struct {
 	BitgetRestClient *common.BitgetRestClient
 }
 
-func (p *MixMarketClient) Init() *MixMarketClient {
-	p.BitgetRestClient = new(common.BitgetRestClient).Init()
-	return p
+func NewMixMarketClient(apiKey string, secretKey string, passphrase string) *MixMarketClient {
+	c := common.NewClient(apiKey, secretKey, passphrase)
+	return &MixMarketClient{c}
 }
 
 func (p *MixMarketClient) Contracts(params map[string]string) (string, error) {

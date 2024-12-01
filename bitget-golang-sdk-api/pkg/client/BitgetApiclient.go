@@ -9,9 +9,9 @@ type BitgetApiClient struct {
 	BitgetRestClient *common.BitgetRestClient
 }
 
-func (p *BitgetApiClient) Init() *BitgetApiClient {
-	p.BitgetRestClient = new(common.BitgetRestClient).Init()
-	return p
+func NewBitgetApiClient(apiKey string, secretKey string, passphrase string) *BitgetApiClient {
+	client := common.NewClient(apiKey, secretKey, passphrase)
+	return &BitgetApiClient{client}
 }
 
 func (p *BitgetApiClient) Post(url string, params map[string]string) (string, error) {

@@ -9,9 +9,9 @@ type SpotAccountClient struct {
 	BitgetRestClient *common.BitgetRestClient
 }
 
-func (p *SpotAccountClient) Init() *SpotAccountClient {
-	p.BitgetRestClient = new(common.BitgetRestClient).Init()
-	return p
+func NewSpotAccountClient(apiKey string, secretKey string, passphrase string) *SpotAccountClient {
+	c := common.NewClient(apiKey, secretKey, passphrase)
+	return &SpotAccountClient{c}
 }
 
 func (p *SpotAccountClient) Info() (string, error) {

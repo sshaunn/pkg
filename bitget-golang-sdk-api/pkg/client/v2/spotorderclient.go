@@ -9,9 +9,9 @@ type SpotOrderClient struct {
 	BitgetRestClient *common.BitgetRestClient
 }
 
-func (p *SpotOrderClient) Init() *SpotOrderClient {
-	p.BitgetRestClient = new(common.BitgetRestClient).Init()
-	return p
+func NewSpotOrderClient(apiKey string, secretKey string, passphrase string) *SpotOrderClient {
+	c := common.NewClient(apiKey, secretKey, passphrase)
+	return &SpotOrderClient{c}
 }
 
 // normal order

@@ -9,9 +9,9 @@ type MixOrderClient struct {
 	BitgetRestClient *common.BitgetRestClient
 }
 
-func (p *MixOrderClient) Init() *MixOrderClient {
-	p.BitgetRestClient = new(common.BitgetRestClient).Init()
-	return p
+func NewMixOrderClient(apiKey string, secretKey string, passphrase string) *MixOrderClient {
+	c := common.NewClient(apiKey, secretKey, passphrase)
+	return &MixOrderClient{c}
 }
 
 // normal order

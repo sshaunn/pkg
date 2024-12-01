@@ -9,9 +9,9 @@ type SpotMarketClient struct {
 	BitgetRestClient *common.BitgetRestClient
 }
 
-func (p *SpotMarketClient) Init() *SpotMarketClient {
-	p.BitgetRestClient = new(common.BitgetRestClient).Init()
-	return p
+func NewSpotMarketClient(apiKey string, secretKey string, passphrase string) *SpotMarketClient {
+	c := common.NewClient(apiKey, secretKey, passphrase)
+	return &SpotMarketClient{c}
 }
 
 func (p *SpotMarketClient) Coins() (string, error) {
